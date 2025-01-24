@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love, Janet ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('https://source.unsplash.com/1920x1080/?romantic,love') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            animation: fadeIn 3s ease;
+        }
+
+        p {
+            font-size: 1.5em;
+            line-height: 1.8;
+            margin: 20px 0;
+            animation: fadeIn 4s ease;
+        }
+
+        .memory-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .memory-gallery img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            border: 2px solid #fff;
+            object-fit: cover;
+        }
+
+        .reveal-button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            animation: fadeIn 5s ease;
+        }
+
+        .reveal-button:hover {
+            background: #ff1493;
+        }
+
+        .surprise-message {
+            display: none;
+            font-size: 2em;
+            margin-top: 20px;
+            animation: fadeIn 6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="audio/romantic-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h1>For My Love, Janet ❤️</h1>
+        <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."
+        </p>
+
+        <div class="memory-gallery">
+            <img src="images/couple.jpg" alt="Memory 1">
+            <img src="images/love.jpg" alt="Memory 2">
+            <img src="images/romantic.jpg" alt="Memory 3">
+        </div>
+    </div>
+
+        <button class="reveal-button" onclick="revealSurprise()">Click for a Surprise</button>
+        <div id="surprise-message" class="surprise-message">I Love You More Than Words Can Say! ❤️</div>
+
+        <div class="countdown">
+            <p>Countdown to our big day: <span id="countdown-timer"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function revealSurprise() {
+            document.getElementById('surprise-message').style.display = 'block';
+        }
+
+        // Countdown Timer
+        const weddingDate = new Date("May 28, 2025 00:00:00").getTime();
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown-timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown-timer").innerHTML = "It's Our Special Day! ❤️";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
