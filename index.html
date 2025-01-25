@@ -274,6 +274,21 @@
             Our beautiful journey has just begun.</p>
         </div>
 
+        <!-- Authentication Forms -->
+        <div id="login-form">
+            <h2>Login</h2>
+            <input type="email" id="login-email" placeholder="Email">
+            <input type="password" id="login-password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+
+        <div id="register-form">
+            <h2>Register</h2>
+            <input type="email" id="register-email" placeholder="Email">
+            <input type="password" id="register-password" placeholder="Password">
+            <button onclick="register()">Register</button>
+        </div>
+
         <!-- Package Section -->
         <div class="tabs">
             <button onclick="showPackage()">Package 2.0</button>
@@ -294,7 +309,82 @@
         Your browser does not support the audio element.
     </audio>
 
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
     <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBn9a1JFsRHxrUCQiMPDIk21R-1xZtqlUc",
+            authDomain: "janet30-4ed37.firebaseapp.com",
+            projectId: "janet30-4ed37",
+            storageBucket: "janet30-4ed37.firebasestorage.app",
+            messagingSenderId: "433604673195",
+            appId: "1:433604673195:web:3d805a8d0c083f557d81ee"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+
+        // Register new users
+        function register() {
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    alert('Registration successful!');
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+        }
+
+        // Login existing users
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    alert('Login successful!');
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+        }
+
+        // Show package details if user is authenticated
+        function showPackage() {
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    document.getElementById('package').style.display = 'block';
+                    document.getElementById('logoutButton').style.display = 'inline-block';
+                } else {
+                    alert("You need to log in to view the package details.");
+                }
+            });
+        }
+
+        // Logout user
+        function logout() {
+            firebase.auth().signOut().then(() => {
+                document.getElementById('package').style.display = 'none';
+                document.getElementById('logoutButton').style.display = 'none';
+                alert('Logged out successfully!');
+            }).catch((error) => {
+                alert(error.message);
+            });
+        }
+
+        // Countdown timers
         const birthdayDate = new Date('2025-01-30T00:00:00');
         const engagementDate = new Date('2025-02-26T00:00:00');
         const weddingDate = new Date('2025-05-28T00:00:00');
@@ -317,6 +407,7 @@
             updateCountdown('weddingCountdown', weddingDate);
         }, 1000);
 
+        // Audio control
         const audio = document.getElementById('backgroundAudio');
         const audioControl = document.getElementById('audioControl');
 
@@ -328,21 +419,6 @@
                 audio.pause();
                 audioControl.innerHTML = "Play Music 🎵";
             }
-        }
-
-        function showPackage() {
-            const password = prompt("Please enter the password to view the package details:");
-            if (password === "yourPassword") {
-                document.getElementById('package').style.display = 'block';
-                document.getElementById('logoutButton').style.display = 'inline-block';
-            } else {
-                alert("Incorrect password. Access denied.");
-            }
-        }
-
-        function logout() {
-            document.getElementById('package').style.display = 'none';
-            document.getElementById('logoutButton').style.display = 'none';
         }
     </script>
 </body>
