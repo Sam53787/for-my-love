@@ -26,20 +26,6 @@
             margin: 10px 0;
         }
 
-        .intro-section {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-
-        .intro-section p {
-            font-size: 1.3rem;
-            color: #333;
-            line-height: 1.6;
-        }
-
         .tabs {
             margin-bottom: 20px;
         }
@@ -164,7 +150,7 @@
         footer {
             margin-top: 20px;
             font-size: 0.9rem;
-            color: white;
+            color: #666;
         }
 
         /* Responsive Design */
@@ -190,11 +176,8 @@
 </head>
 <body>
     <div class="container">
-        <!-- Intro Section -->
-        <div class="intro-section">
-            <h1>For My Love, Janet ❤️</h1>
-            <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."</p>
-        </div>
+        <h1>For My Love, Janet ❤️</h1>
+        <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."</p>
 
         <!-- Countdown Section -->
         <div class="countdown-container">
@@ -311,54 +294,29 @@
         Your browser does not support the audio element.
     </audio>
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "firebase/app";
-        import { getAuth, onAuthStateChanged, signInAnonymously, signOut } from "firebase/auth";
-        
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBn9a1JFsRHxrUCQiMPDIk21R-1xZtqlUc",
-            authDomain: "janet30-4ed37.firebaseapp.com",
-            projectId: "janet30-4ed37",
-            storageBucket: "janet30-4ed37.firebasestorage.app",
-            messagingSenderId: "433604673195",
-            appId: "1:433604673195:web:3d805a8d0c083f557d81ee"
-        };
+    <script>
+        const birthdayDate = new Date('2025-01-30T00:00:00');
+        const engagementDate = new Date('2025-02-26T00:00:00');
+        const weddingDate = new Date('2025-05-28T00:00:00');
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+        function updateCountdown(id, eventDate) {
+            const now = new Date();
+            const diff = eventDate - now;
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log('User logged in:', user);
-                document.getElementById('logoutButton').style.display = 'inline-block';
-            } else {
-                console.log('No user logged in');
-                document.getElementById('logoutButton').style.display = 'none';
-            }
-        });
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        function signIn() {
-            signInAnonymously(auth).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(`${errorCode}: ${errorMessage}`);
-            });
+            document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
 
-        function signOutUser() {
-            signOut(auth).then(() => {
-                console.log('User signed out');
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(`${errorCode}: ${errorMessage}`);
-            });
-        }
+        setInterval(() => {
+            updateCountdown('birthdayCountdown', birthdayDate);
+            updateCountdown('engagementCountdown', engagementDate);
+            updateCountdown('weddingCountdown', weddingDate);
+        }, 1000);
 
-        // Firebase logic for authentication
         const audio = document.getElementById('backgroundAudio');
         const audioControl = document.getElementById('audioControl');
 
@@ -372,37 +330,20 @@
             }
         }
 
-        // Countdown timer functions
-        function updateCountdown() {
-            const now = new Date().getTime();
-
-            // Dates for the countdown
-            const birthdayDate = new Date('January 30, 2025').getTime();
-            const engagementDate = new Date('February 26, 2025').getTime();
-            const weddingDate = new Date('May 28, 2025').getTime();
-
-            // Calculate time remaining for each event
-            const birthdayRemaining = birthdayDate - now;
-            const engagementRemaining = engagementDate - now;
-            const weddingRemaining = weddingDate - now;
-
-            // Update the countdown timers
-            document.getElementById('birthdayCountdown').innerHTML = formatTime(birthdayRemaining);
-            document.getElementById('engagementCountdown').innerHTML = formatTime(engagementRemaining);
-            document.getElementById('weddingCountdown').innerHTML = formatTime(weddingRemaining);
+        function showPackage() {
+            const password = prompt("Please enter the password to view the package details:");
+            if (password === "yourPassword") {
+                document.getElementById('package').style.display = 'block';
+                document.getElementById('logoutButton').style.display = 'inline-block';
+            } else {
+                alert("Incorrect password. Access denied.");
+            }
         }
 
-        function formatTime(ms) {
-            const days = Math.floor(ms / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((ms % (1000 * 60)) / 1000);
-
-            return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        function logout() {
+            document.getElementById('package').style.display = 'none';
+            document.getElementById('logoutButton').style.display = 'none';
         }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call to update countdown
     </script>
 </body>
 </html>
