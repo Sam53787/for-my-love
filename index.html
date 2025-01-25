@@ -230,7 +230,7 @@
         <!-- Package Section -->
         <div class="tabs">
             <button onclick="showPackage()">Package</button>
-            <button onclick="logout()">Logout</button>
+            <button id="logoutButton" style="display:none;" onclick="logout()">Logout</button>
         </div>
         <div id="package" class="section" style="display:none;">
             <h2>Package Details</h2>
@@ -286,6 +286,7 @@
             const password = prompt("Please enter the password to view the package details:");
             if (password === "yourPassword") {
                 document.getElementById('package').style.display = 'block';
+                document.getElementById('logoutButton').style.display = 'inline-block';
             } else {
                 alert("Incorrect password. Access denied.");
             }
@@ -293,6 +294,7 @@
 
         function logout() {
             document.getElementById('package').style.display = 'none';
+            document.getElementById('logoutButton').style.display = 'none';
         }
     </script>
 </body>
