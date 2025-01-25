@@ -7,7 +7,8 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #ffdde1, #f0f8ff); /* Romantic gradient */
+            background: url('background-placeholder.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
             margin: 0;
             padding: 20px;
@@ -43,8 +44,9 @@
         }
 
         .memory-gallery img {
-            width: 180px;
-            height: 180px;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
             border-radius: 10px;
             border: 3px solid #ff69b4;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -52,10 +54,14 @@
 
         .countdown-section {
             margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            background: rgba(255, 245, 245, 0.8);
         }
 
         .countdown {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #ff4500;
             font-weight: bold;
             margin: 10px 0;
@@ -93,34 +99,36 @@
     </style>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="audio/romantic-music.mp3" type="audio/mpeg">
-    </audio>
-
     <div class="container">
         <h1>For My Love, Janet ❤️</h1>
-        <p>"My dear Janet, you’ve filled my life with endless joy and love. Every moment feels like a dream come true. You are my forever and always."</p>
-        <p>"No words can ever describe how much you mean to me. You are the reason I smile every single day. I love you, Janet! ❤️"</p>
+        <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."</p>
 
         <!-- Memory Gallery -->
         <div class="memory-gallery"> 
             <img src="couple.JPG" alt="Memory 1">
             <img src="love.jpg" alt="Memory 2">
             <img src="romantic.JPG" alt="Memory 3">
-            <img src="special-moment.jpg" alt="Memory 4">
-            <img src="happy-time.jpg" alt="Memory 5">
         </div>
 
-        <!-- Countdown Section -->
+        <!-- Countdown Sections -->
         <div class="countdown-section">
-            <div class="countdown" id="marriage-countdown">Countdown to our Big Day: Loading...</div>
-            <div class="countdown" id="birthday-countdown">Countdown to Janet's Birthday: Loading...</div>
-            <div class="countdown" id="engagement-countdown">Countdown to Our Engagement: Loading...</div>
+            <h2>Countdown to Our Big Day</h2>
+            <div class="countdown" id="marriage-countdown">Loading...</div>
+        </div>
+
+        <div class="countdown-section">
+            <h2>Countdown to Janet's Birthday</h2>
+            <div class="countdown" id="birthday-countdown">Loading...</div>
+        </div>
+
+        <div class="countdown-section">
+            <h2>Countdown to Our Engagement</h2>
+            <div class="countdown" id="engagement-countdown">Loading...</div>
         </div>
 
         <!-- Surprise Button -->
-        <button class="surprise-button" onclick="showSurprise()">Click for a Surprise</button>
-        <p id="surprise-message">🎉 Surprise! I love you more than words can say! You’re my everything, Janet. 💖</p>
+        <button class="surprise-button" onclick="toggleSurprise()">Click for a Surprise</button>
+        <p id="surprise-message">🎉 Surprise! You’re the love of my life, Janet! I’m counting down the moments until our forever begins. 💖</p>
     </div>
 
     <footer>
@@ -158,9 +166,10 @@
             }, 1000);
         }
 
-        // Show Surprise Message
-        function showSurprise() {
-            document.getElementById('surprise-message').style.display = 'block';
+        // Toggle Surprise Message
+        function toggleSurprise() {
+            const surpriseMessage = document.getElementById('surprise-message');
+            surpriseMessage.style.display = surpriseMessage.style.display === 'block' ? 'none' : 'block';
         }
 
         // Start Countdown on Load
