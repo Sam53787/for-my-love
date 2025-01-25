@@ -275,23 +275,25 @@
         </div>
 
         <!-- Authentication Forms -->
-        <div id="login-form">
-            <h2>Login</h2>
-            <input type="email" id="login-email" placeholder="Email">
-            <input type="password" id="login-password" placeholder="Password">
-            <button onclick="login()">Login</button>
-        </div>
+        <div id="auth-forms" style="display:none;">
+            <div id="login-form">
+                <h2>Login</h2>
+                <input type="email" id="login-email" placeholder="Email">
+                <input type="password" id="login-password" placeholder="Password">
+                <button onclick="login()">Login</button>
+            </div>
 
-        <div id="register-form">
-            <h2>Register</h2>
-            <input type="email" id="register-email" placeholder="Email">
-            <input type="password" id="register-password" placeholder="Password">
-            <button onclick="register()">Register</button>
+            <div id="register-form">
+                <h2>Register</h2>
+                <input type="email" id="register-email" placeholder="Email">
+                <input type="password" id="register-password" placeholder="Password">
+                <button onclick="register()">Register</button>
+            </div>
         </div>
 
         <!-- Package Section -->
         <div class="tabs">
-            <button onclick="showPackage()">Package 2.0</button>
+            <button onclick="showAuthForms()">Package 2.0</button>
             <button id="logoutButton" style="display:none;" onclick="logout()">Logout</button>
         </div>
         <div id="package" class="section" style="display:none;">
@@ -335,6 +337,9 @@
                     // Signed in 
                     const user = userCredential.user;
                     alert('Registration successful!');
+                    document.getElementById('auth-forms').style.display = 'none';
+                    document.getElementById('package').style.display = 'block';
+                    document.getElementById('logoutButton').style.display = 'inline-block';
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -353,12 +358,20 @@
                     // Signed in
                     const user = userCredential.user;
                     alert('Login successful!');
+                    document.getElementById('auth-forms').style.display = 'none';
+                    document.getElementById('package').style.display = 'block';
+                    document.getElementById('logoutButton').style.display = 'inline-block';
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     alert(errorMessage);
                 });
+        }
+
+        // Show authentication forms
+        function showAuthForms() {
+            document.getElementById('auth-forms').style.display = 'block';
         }
 
         // Show package details if user is authenticated
