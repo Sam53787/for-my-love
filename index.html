@@ -17,7 +17,7 @@
 
         h1 {
             color: #ff69b4;
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
@@ -37,15 +37,16 @@
 
         .memory-gallery {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
             gap: 15px;
+            justify-content: center;
             margin: 20px 0;
         }
 
         .memory-gallery img {
-            width: 250px;
-            height: 250px;
+            width: 100%;
+            max-width: 250px;
+            height: auto;
             object-fit: cover;
             border-radius: 10px;
             border: 3px solid #ff69b4;
@@ -58,6 +59,13 @@
             border: 2px solid #ff69b4;
             border-radius: 10px;
             background: rgba(255, 245, 245, 0.8);
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 1.5rem;
+            color: #ff1493;
+            margin-bottom: 10px;
         }
 
         .countdown {
@@ -96,6 +104,26 @@
             font-size: 0.9rem;
             color: #555;
         }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .countdown-section {
+                padding: 15px;
+            }
+
+            .memory-gallery img {
+                max-width: 90%;
+            }
+
+            .surprise-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -104,7 +132,7 @@
         <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."</p>
 
         <!-- Memory Gallery -->
-        <div class="memory-gallery"> 
+        <div class="memory-gallery">
             <img src="couple.JPG" alt="Memory 1">
             <img src="love.jpg" alt="Memory 2">
             <img src="romantic.JPG" alt="Memory 3">
@@ -112,17 +140,17 @@
 
         <!-- Countdown Sections -->
         <div class="countdown-section">
-            <h2>Countdown to Our Big Day</h2>
+            <div class="countdown-title">Countdown to Our Big Day</div>
             <div class="countdown" id="marriage-countdown">Loading...</div>
         </div>
 
         <div class="countdown-section">
-            <h2>Countdown to Janet's Birthday</h2>
+            <div class="countdown-title">Countdown to Janet's Birthday</div>
             <div class="countdown" id="birthday-countdown">Loading...</div>
         </div>
 
         <div class="countdown-section">
-            <h2>Countdown to Our Engagement</h2>
+            <div class="countdown-title">Countdown to Our Engagement</div>
             <div class="countdown" id="engagement-countdown">Loading...</div>
         </div>
 
