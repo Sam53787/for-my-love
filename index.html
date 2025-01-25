@@ -26,6 +26,32 @@
             margin: 10px 0;
         }
 
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 5px;
+        }
+
+        .tabs button:hover {
+            background-color: #ff1493;
+            transform: scale(1.1);
+        }
+
+        .section {
+            display: none;
+        }
+
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -153,52 +179,70 @@
         <h1>For My Love, Janet ❤️</h1>
         <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."</p>
 
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button onclick="showSection('countdown')">Countdown</button>
+            <button onclick="showSection('gallery')">Gallery</button>
+            <button onclick="showSection('video')">Video</button>
+            <button onclick="showSection('lyrics')">Lyrics</button>
+            <button onclick="showPackage()">Package</button>
+        </div>
+
         <!-- Countdown Section -->
-        <div class="countdown-container">
-            <div class="countdown-card">
-                <div class="countdown-title">Your Birthday 🎂</div>
-                <div class="countdown-timer" id="birthdayCountdown"></div>
-            </div>
-            <div class="countdown-card">
-                <div class="countdown-title">Our Engagement 💍</div>
-                <div class="countdown-timer" id="engagementCountdown"></div>
-            </div>
-            <div class="countdown-card">
-                <div class="countdown-title">Our Wedding 💒</div>
-                <div class="countdown-timer" id="weddingCountdown"></div>
+        <div id="countdown" class="section">
+            <div class="countdown-container">
+                <div class="countdown-card">
+                    <div class="countdown-title">Your Birthday 🎂</div>
+                    <div class="countdown-timer" id="birthdayCountdown"></div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-title">Our Engagement 💍</div>
+                    <div class="countdown-timer" id="engagementCountdown"></div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-title">Our Wedding 💒</div>
+                    <div class="countdown-timer" id="weddingCountdown"></div>
+                </div>
             </div>
         </div>
 
         <!-- Image Gallery -->
-        <div class="image-gallery">
-            <img src="couple.JPG" alt="Memory 1">
-            <img src="love.jpg" alt="Memory 2">
-            <img src="romantic.JPG" alt="Memory 3">
+        <div id="gallery" class="section">
+            <div class="image-gallery">
+                <img src="couple.JPG" alt="Memory 1">
+                <img src="love.jpg" alt="Memory 2">
+                <img src="romantic.JPG" alt="Memory 3">
+            </div>
         </div>
 
         <!-- Video Section -->
-        <div class="video-container">
-            <video controls>
-                <source src="A&J.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
-        <!-- Audio Section -->
-        <div class="audio-container">
-            <button class="audio-button" id="audioControl" onclick="toggleAudio()">Play Music 🎵</button>
+        <div id="video" class="section">
+            <div class="video-container">
+                <video controls>
+                    <source src="A&J.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
 
         <!-- Lyrics Section -->
-        <div class="lyrics-section">
-            <h3>Lyrics: A Beautiful Journey Awaiting</h3>
-            <p>(Verse 1) In the quiet corners of her soul, she hides,<br>
-            A world of dreams behind her gentle eyes.<br>
-            She speaks in whispers, where comfort grows,<br>
-            A heart reserved for the ones she knows.</p>
-            <p><strong>(Chorus)</strong> She’s my gym queen, strong and free...<br>
-            Waiting for the day, when two become one,<br>
-            Our beautiful journey has just begun.</p>
+        <div id="lyrics" class="section">
+            <div class="lyrics-section">
+                <h3>Lyrics: A Beautiful Journey Awaiting</h3>
+                <p>(Verse 1) In the quiet corners of her soul, she hides,<br>
+                A world of dreams behind her gentle eyes.<br>
+                She speaks in whispers, where comfort grows,<br>
+                A heart reserved for the ones she knows.</p>
+                <p><strong>(Chorus)</strong> She’s my gym queen, strong and free...<br>
+                Waiting for the day, when two become one,<br>
+                Our beautiful journey has just begun.</p>
+            </div>
+        </div>
+
+        <!-- Package Section -->
+        <div id="package" class="section">
+            <h2>Package Details</h2>
+            <p>Here are the details of the package...</p>
         </div>
     </div>
 
@@ -244,6 +288,21 @@
             } else {
                 audio.pause();
                 audioControl.innerHTML = "Play Music 🎵";
+            }
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function showPackage() {
+            const password = prompt("Please enter the password to view the package details:");
+            if (password === "yourPassword") {
+                showSection('package');
+            } else {
+                alert("Incorrect password. Access denied.");
             }
         }
     </script>
