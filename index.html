@@ -93,29 +93,32 @@
             transform: scale(1.1);
         }
 
-        .lyrics-container {
-            background-color: rgba(255, 240, 245, 0.8);
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            max-width: 700px;
-            text-align: left;
-        }
-
-        .lyrics-title {
-            color: #ff1493;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .lyrics {
+        .lyrics-section {
+            margin: 30px 0;
             font-size: 1rem;
-            line-height: 1.8;
-            white-space: pre-wrap;
-            color: #333;
+            text-align: left;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            border: 2px solid #ff69b4;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-container {
+            margin: 20px auto;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 10px;
         }
 
         footer {
@@ -139,7 +142,7 @@
                 font-size: 0.9rem;
             }
 
-            .lyrics {
+            .lyrics-section {
                 font-size: 0.9rem;
             }
         }
@@ -173,46 +176,29 @@
             <img src="romantic.JPG" alt="Memory 3">
         </div>
 
+        <!-- Video Section -->
+        <div class="video-container">
+            <video controls>
+                <source src="A&J.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
         <!-- Audio Section -->
         <div class="audio-container">
             <button class="audio-button" id="audioControl" onclick="toggleAudio()">Play Music 🎵</button>
         </div>
 
         <!-- Lyrics Section -->
-        <div class="lyrics-container">
-            <div class="lyrics-title">Lyrics: A Beautiful Journey Awaiting</div>
-            <div class="lyrics">
-                (Verse 1) In the quiet corners of her soul, she hides,  
-                A world of dreams behind her gentle eyes.  
-                She speaks in whispers, where comfort grows,  
-                A heart reserved for the ones she knows.  
-
-                (Pre-Chorus) But there's a spark that only a few can see,  
-                A fire that burns with sweet intensity.  
-
-                (Chorus) She’s my gym queen, strong and free,  
-                With anime worlds that set her spirit free.  
-                A daddy's girl with her heart so true,  
-                Granny’s blessing shining in all she’ll do.  
-                Cute and pretty, modern grace,  
-                She lights my life, my heart, my place.  
-                Waiting for the day, when two become one,  
-                Our beautiful journey, just begun.  
-
-                (Bridge) Every step we’ll take hand in hand,  
-                Through love’s uncharted, wondrous land.  
-                Together we’ll laugh, together we’ll cry,  
-                A lifetime of moments under endless skies.  
-
-                (Final Chorus) She’s my gym queen, strong and free,  
-                With anime worlds that set her spirit free.  
-                A daddy's girl with her heart so true,  
-                Granny’s blessing shining in all she’ll do.  
-                Cute and pretty, modern grace,  
-                She lights my life, my heart, my place.  
-                Now the wait is over, forever we’ll run,  
-                Our beautiful journey has just begun.
-            </div>
+        <div class="lyrics-section">
+            <h3>Lyrics: A Beautiful Journey Awaiting</h3>
+            <p>(Verse 1) In the quiet corners of her soul, she hides,<br>
+            A world of dreams behind her gentle eyes.<br>
+            She speaks in whispers, where comfort grows,<br>
+            A heart reserved for the ones she knows.</p>
+            <p><strong>(Chorus)</strong> She’s my gym queen, strong and free...<br>
+            Waiting for the day, when two become one,<br>
+            Our beautiful journey has just begun.</p>
         </div>
     </div>
 
@@ -220,7 +206,6 @@
         Made with ❤️ by Agastin for Janet. You are my forever! 💞
     </footer>
 
-    <!-- Audio Element -->
     <audio id="backgroundAudio" loop>
         <source src="romantic-music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
