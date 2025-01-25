@@ -6,50 +6,89 @@
     <title>For My Love, Janet ❤️</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff; /* Light blue background */
-            color: #333; /* Dark text for visibility */
-            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #ffdde1, #f0f8ff); /* Romantic gradient */
+            color: #333;
             margin: 0;
             padding: 20px;
+            text-align: center;
         }
 
         h1 {
-            color: #ff69b4; /* Hot pink for love theme */
+            color: #ff69b4;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .memory-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
         }
 
         .memory-gallery img {
-            margin: 10px;
-            border: 3px solid #ff69b4; /* Match theme with pink border */
+            width: 180px;
+            height: 180px;
             border-radius: 10px;
-            width: 150px;
-            height: 150px;
+            border: 3px solid #ff69b4;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .countdown-section {
+            margin: 30px 0;
         }
 
         .countdown {
-            font-size: 24px;
-            margin: 20px 0;
-            color: #ff4500; /* Bright orange for visibility */
+            font-size: 1.5rem;
+            color: #ff4500;
+            font-weight: bold;
+            margin: 10px 0;
         }
 
         .surprise-button {
-            background-color: #ff69b4; /* Hot pink button */
-            color: #fff; /* White text */
+            background-color: #ff69b4;
+            color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 12px 25px;
+            font-size: 1rem;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .surprise-button:hover {
-            background-color: #ff1493; /* Darker pink on hover */
+            background-color: #ff1493;
+            transform: scale(1.1);
+        }
+
+        #surprise-message {
+            font-size: 1.5rem;
+            color: #ff1493;
+            display: none;
+            margin-top: 20px;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #555;
         }
     </style>
 </head>
@@ -60,41 +99,47 @@
 
     <div class="container">
         <h1>For My Love, Janet ❤️</h1>
-        <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."
-        </p>
-
-        <!-- Countdown -->
-        <div class="countdown" id="countdown">
-            Countdown: Loading...
-        </div>
+        <p>"My dear Janet, you’ve filled my life with endless joy and love. Every moment feels like a dream come true. You are my forever and always."</p>
+        <p>"No words can ever describe how much you mean to me. You are the reason I smile every single day. I love you, Janet! ❤️"</p>
 
         <!-- Memory Gallery -->
         <div class="memory-gallery"> 
             <img src="couple.JPG" alt="Memory 1">
             <img src="love.jpg" alt="Memory 2">
             <img src="romantic.JPG" alt="Memory 3">
+            <img src="special-moment.jpg" alt="Memory 4">
+            <img src="happy-time.jpg" alt="Memory 5">
+        </div>
+
+        <!-- Countdown Section -->
+        <div class="countdown-section">
+            <div class="countdown" id="marriage-countdown">Countdown to our Big Day: Loading...</div>
+            <div class="countdown" id="birthday-countdown">Countdown to Janet's Birthday: Loading...</div>
+            <div class="countdown" id="engagement-countdown">Countdown to Our Engagement: Loading...</div>
         </div>
 
         <!-- Surprise Button -->
         <button class="surprise-button" onclick="showSurprise()">Click for a Surprise</button>
-
-        <p id="surprise-message" style="display: none; font-size: 20px; color: #ff1493; margin-top: 20px;">
-            🎉 Surprise! You’re the love of my life, Janet! I’m counting down the moments until our forever begins. 💖
-        </p>
+        <p id="surprise-message">🎉 Surprise! I love you more than words can say! You’re my everything, Janet. 💖</p>
     </div>
+
+    <footer>
+        Made with ❤️ by Agastin for Janet. You are my forever! 💞
+    </footer>
 
     <script>
         // Countdown Timer
         function startCountdown() {
-            const countdownElement = document.getElementById('countdown');
-            const eventDate = new Date('2025-05-28T00:00:00'); // Change to your event date
-            const interval = setInterval(() => {
+            const marriageDate = new Date('2025-05-28T00:00:00');
+            const birthdayDate = new Date('2025-01-30T00:00:00');
+            const engagementDate = new Date('2025-02-26T00:00:00');
+
+            const updateCountdown = (date, elementId) => {
                 const now = new Date();
-                const timeLeft = eventDate - now;
+                const timeLeft = date - now;
 
                 if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    countdownElement.innerHTML = "🎉 The Big Day is Here! 🎉";
+                    document.getElementById(elementId).innerHTML = "🎉 Happening Today!";
                     return;
                 }
 
@@ -103,7 +148,13 @@
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                countdownElement.innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                document.getElementById(elementId).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            };
+
+            setInterval(() => {
+                updateCountdown(marriageDate, 'marriage-countdown');
+                updateCountdown(birthdayDate, 'birthday-countdown');
+                updateCountdown(engagementDate, 'engagement-countdown');
             }, 1000);
         }
 
