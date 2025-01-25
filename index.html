@@ -230,6 +230,7 @@
         <!-- Package Section -->
         <div class="tabs">
             <button onclick="showPackage()">Package</button>
+            <button onclick="logout()">Logout</button>
         </div>
         <div id="package" class="section" style="display:none;">
             <h2>Package Details</h2>
@@ -262,7 +263,6 @@
 
             document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
-
         setInterval(() => {
             updateCountdown('birthdayCountdown', birthdayDate);
             updateCountdown('engagementCountdown', engagementDate);
@@ -289,6 +289,10 @@
             } else {
                 alert("Incorrect password. Access denied.");
             }
+        }
+
+        function logout() {
+            document.getElementById('package').style.display = 'none';
         }
     </script>
 </body>
