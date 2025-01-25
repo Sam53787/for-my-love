@@ -26,6 +26,32 @@
             margin: 10px 0;
         }
 
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 5px;
+        }
+
+        .tabs button:hover {
+            background-color: #ff1493;
+            transform: scale(1.1);
+        }
+
+        .section {
+            display: none;
+        }
+
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -202,6 +228,9 @@
         </div>
 
         <!-- Package Section -->
+        <div class="tabs">
+            <button onclick="showPackage()">Package</button>
+        </div>
         <div id="package" class="section" style="display:none;">
             <h2>Package Details</h2>
             <p>Here are the details of the package...</p>
@@ -251,12 +280,6 @@
                 audio.pause();
                 audioControl.innerHTML = "Play Music 🎵";
             }
-        }
-
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
         }
 
         function showPackage() {
