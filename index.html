@@ -6,81 +6,50 @@
     <title>For My Love, Janet ❤️</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: url('https://source.unsplash.com/1920x1080/?romantic,love') no-repeat center center/cover;
-            color: #fff;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333; /* Dark text for visibility */
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        .container {
-            background: rgba(0, 0, 0, 0.6);
+            margin: 0;
             padding: 20px;
-            border-radius: 15px;
-            margin: 20px;
         }
 
         h1 {
-            font-size: 3em;
-            margin: 0;
-            animation: fadeIn 3s ease;
+            color: #ff69b4; /* Hot pink for love theme */
         }
 
-        p {
-            font-size: 1.5em;
-            line-height: 1.8;
-            margin: 20px 0;
-            animation: fadeIn 4s ease;
-        }
-
-        .memory-gallery {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .memory-gallery img {
+            margin: 10px;
+            border: 3px solid #ff69b4; /* Match theme with pink border */
+            border-radius: 10px;
             width: 150px;
             height: 150px;
-            border-radius: 10px;
-            border: 2px solid #fff;
-            object-fit: cover;
         }
 
-        .reveal-button {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            color: #fff;
-            background: #ff69b4;
+        .countdown {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #ff4500; /* Bright orange for visibility */
+        }
+
+        .surprise-button {
+            background-color: #ff69b4; /* Hot pink button */
+            color: #fff; /* White text */
             border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
-            animation: fadeIn 5s ease;
         }
 
-        .reveal-button:hover {
-            background: #ff1493;
-        }
-
-        .surprise-message {
-            display: none;
-            font-size: 2em;
-            margin-top: 20px;
-            animation: fadeIn 6s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .surprise-button:hover {
+            background-color: #ff1493; /* Darker pink on hover */
         }
     </style>
 </head>
@@ -94,43 +63,57 @@
         <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."
         </p>
 
-        <div class="memory-gallery"> 
-    <img src="couple.JPG" alt="Memory 1">
-    <img src="love.jpg" alt="Memory 2">
-    <img src="romantic.JPG" alt="Memory 3">
-</div>
-
-        <button class="reveal-button" onclick="revealSurprise()">Click for a Surprise</button>
-        <div id="surprise-message" class="surprise-message">I Love You More Than Words Can Say! ❤️</div>
-
-        <div class="countdown">
-            <p>Countdown to our big day: <span id="countdown-timer"></span></p>
+        <!-- Countdown -->
+        <div class="countdown" id="countdown">
+            Countdown: Loading...
         </div>
+
+        <!-- Memory Gallery -->
+        <div class="memory-gallery"> 
+            <img src="couple.JPG" alt="Memory 1">
+            <img src="love.jpg" alt="Memory 2">
+            <img src="romantic.JPG" alt="Memory 3">
+        </div>
+
+        <!-- Surprise Button -->
+        <button class="surprise-button" onclick="showSurprise()">Click for a Surprise</button>
+
+        <p id="surprise-message" style="display: none; font-size: 20px; color: #ff1493; margin-top: 20px;">
+            🎉 Surprise! You’re the love of my life, Janet! I’m counting down the moments until our forever begins. 💖
+        </p>
     </div>
 
     <script>
-        function revealSurprise() {
+        // Countdown Timer
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const eventDate = new Date('2025-05-28T00:00:00'); // Change to your event date
+            const interval = setInterval(() => {
+                const now = new Date();
+                const timeLeft = eventDate - now;
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "🎉 The Big Day is Here! 🎉";
+                    return;
+                }
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+
+        // Show Surprise Message
+        function showSurprise() {
             document.getElementById('surprise-message').style.display = 'block';
         }
 
-        // Countdown Timer
-        const weddingDate = new Date("May 28, 2025 00:00:00").getTime();
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown-timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("countdown-timer").innerHTML = "It's Our Special Day! ❤️";
-            }
-        }, 1000);
+        // Start Countdown on Load
+        window.onload = startCountdown;
     </script>
 </body>
 </html>
