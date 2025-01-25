@@ -26,6 +26,41 @@
             margin: 10px 0;
         }
 
+        /* Navigation Bar */
+        .navbar {
+            background-color: #ff69b4;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Package Tab */
+        .package-section {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            border: 2px solid #ff69b4;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .password-container {
+            margin-top: 20px;
+        }
+
+        /* Countdown and other sections styles */
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -56,100 +91,21 @@
             margin-top: 10px;
         }
 
-        .image-gallery {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px auto;
-            flex-wrap: wrap;
-        }
-
-        .image-gallery img {
-            width: 250px;
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid #ff69b4;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .audio-container {
-            margin: 20px auto;
-        }
-
-        .audio-button {
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .audio-button:hover {
-            background-color: #ff1493;
-            transform: scale(1.1);
-        }
-
-        .lyrics-section {
-            margin: 30px 0;
-            font-size: 1rem;
-            text-align: left;
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            border: 2px solid #ff69b4;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            line-height: 1.6;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .video-container {
-            margin: 20px auto;
-            border: 2px solid #ff69b4;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
-        }
-
-        .video-container video {
-            width: 100%;
-            border-radius: 10px;
-        }
-
         footer {
             margin-top: 20px;
             font-size: 0.9rem;
             color: #666;
         }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .countdown-card {
-                width: 100%;
-            }
-
-            .audio-button {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-
-            .lyrics-section {
-                font-size: 0.9rem;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <a href="#">Home</a>
+            <a href="#" onclick="showPackage()">Package</a>
+        </div>
+
         <h1>For My Love, Janet ❤️</h1>
         <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."</p>
 
@@ -179,7 +135,7 @@
         <!-- Video Section -->
         <div class="video-container">
             <video controls>
-                <source src="A&J.mp4" type="video/mp4">
+                <source src="romantic-video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -200,11 +156,23 @@
             Waiting for the day, when two become one,<br>
             Our beautiful journey has just begun.</p>
         </div>
-    </div>
 
-    <footer>
-        Made with ❤️ by Agastin for Janet. You are my forever! 💞
-    </footer>
+        <!-- Package Section (Hidden by default) -->
+        <div class="package-section" id="packageSection">
+            <h2>Exclusive Package for Janet</h2>
+            <p>This section is password-protected. Welcome to the special surprise, my love! 💝</p>
+        </div>
+
+        <!-- Password Section -->
+        <div class="password-container" id="passwordContainer">
+            <input type="password" id="passwordInput" placeholder="Enter password" />
+            <button onclick="checkPassword()">Submit</button>
+        </div>
+
+        <footer>
+            Made with ❤️ by Agastin for Janet. You are my forever! 💞
+        </footer>
+    </div>
 
     <audio id="backgroundAudio" loop>
         <source src="romantic-music.mp3" type="audio/mpeg">
@@ -212,6 +180,7 @@
     </audio>
 
     <script>
+        // Countdown and other functionality (existing code remains)
         const birthdayDate = new Date('2025-01-30T00:00:00');
         const engagementDate = new Date('2025-02-26T00:00:00');
         const weddingDate = new Date('2025-05-28T00:00:00');
@@ -234,6 +203,25 @@
             updateCountdown('weddingCountdown', weddingDate);
         }, 1000);
 
+        // Password Protection
+        function showPackage() {
+            document.getElementById('passwordContainer').style.display = 'block';
+            document.getElementById('packageSection').style.display = 'none';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const correctPassword = 'janet123';  // Set your desired password here
+
+            if (password === correctPassword) {
+                document.getElementById('packageSection').style.display = 'block';
+                document.getElementById('passwordContainer').style.display = 'none';
+            } else {
+                alert('Incorrect password! Please try again.');
+            }
+        }
+
+        // Audio functionality
         const audio = document.getElementById('backgroundAudio');
         const audioControl = document.getElementById('audioControl');
 
