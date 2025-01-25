@@ -19,21 +19,11 @@
             color: #ff69b4;
             font-size: 2.5rem;
             margin-bottom: 20px;
-            background-color: rgba(0, 0, 0, 0.5); /* Add semi-transparent background */
-            padding: 10px;
-            border-radius: 8px;
         }
 
         p {
             font-size: 1.2rem;
             margin: 10px 0;
-            color: #ffffff; /* White text color for better visibility */
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            padding: 15px;
-            border-radius: 8px;
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .tabs {
@@ -160,10 +150,7 @@
         footer {
             margin-top: 20px;
             font-size: 0.9rem;
-            color: #ff69b4; /* Pink text color for footer */
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            padding: 10px;
-            border-radius: 8px;
+            color: #666;
         }
 
         /* Responsive Design */
@@ -183,11 +170,6 @@
 
             .lyrics-section {
                 font-size: 0.9rem;
-            }
-
-            footer {
-                font-size: 0.8rem;
-                padding: 8px;
             }
         }
     </style>
@@ -326,34 +308,42 @@
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            document.getElementById(id).innerHTML =
-                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
 
-        function toggleAudio() {
-            const audio = document.getElementById('backgroundAudio');
-            if (audio.paused) {
-                audio.play();
-                document.getElementById('audioControl').innerHTML = "Pause Music 🎵";
-            } else {
-                audio.pause();
-                document.getElementById('audioControl').innerHTML = "Play Music 🎵";
-            }
-        }
-
-        function showPackage() {
-            document.getElementById('package').style.display = 'block';
-        }
-
-        function logout() {
-            window.location.href = 'login-page.html';  // Redirect to a login page after logout
-        }
-
-        setInterval(function() {
+        setInterval(() => {
             updateCountdown('birthdayCountdown', birthdayDate);
             updateCountdown('engagementCountdown', engagementDate);
             updateCountdown('weddingCountdown', weddingDate);
         }, 1000);
+
+        const audio = document.getElementById('backgroundAudio');
+        const audioControl = document.getElementById('audioControl');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                audioControl.innerHTML = "Pause Music ⏸️";
+            } else {
+                audio.pause();
+                audioControl.innerHTML = "Play Music 🎵";
+            }
+        }
+
+        function showPackage() {
+            const password = prompt("Please enter the password to view the package details:");
+            if (password === "yourPassword") {
+                document.getElementById('package').style.display = 'block';
+                document.getElementById('logoutButton').style.display = 'inline-block';
+            } else {
+                alert("Incorrect password. Access denied.");
+            }
+        }
+
+        function logout() {
+            document.getElementById('package').style.display = 'none';
+            document.getElementById('logoutButton').style.display = 'none';
+        }
     </script>
 </body>
 </html>
