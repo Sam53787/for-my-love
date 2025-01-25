@@ -26,56 +26,57 @@
             margin: 10px 0;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.9);
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px auto;
+        }
+
+        .countdown-card {
+            background-color: #fff;
+            border: 2px solid #ff69b4;
             padding: 20px;
             border-radius: 15px;
+            width: 280px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .memory-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .memory-gallery img {
-            width: 100%;
-            max-width: 250px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 3px solid #ff69b4;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .countdown-section {
-            margin: 30px 0;
-            padding: 20px;
-            border: 2px solid #ff69b4;
-            border-radius: 10px;
-            background: rgba(255, 245, 245, 0.8);
             text-align: center;
         }
 
         .countdown-title {
-            font-size: 1.5rem;
-            color: #ff1493;
-            margin-bottom: 10px;
-        }
-
-        .countdown {
-            font-size: 1.8rem;
-            color: #ff4500;
+            font-size: 1.2rem;
             font-weight: bold;
-            margin: 10px 0;
+            color: #ff69b4;
         }
 
-        .surprise-button {
+        .countdown-timer {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px auto;
+            flex-wrap: wrap;
+        }
+
+        .image-gallery img {
+            width: 250px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #ff69b4;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .audio-container {
+            margin: 20px auto;
+        }
+
+        .audio-button {
             background-color: #ff69b4;
             color: white;
             border: none;
@@ -87,22 +88,15 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        .surprise-button:hover {
+        .audio-button:hover {
             background-color: #ff1493;
             transform: scale(1.1);
         }
 
-        #surprise-message {
-            font-size: 1.5rem;
-            color: #ff1493;
-            display: none;
-            margin-top: 20px;
-        }
-
         footer {
-            margin-top: 30px;
+            margin-top: 20px;
             font-size: 0.9rem;
-            color: #555;
+            color: #666;
         }
 
         /* Responsive Design */
@@ -111,15 +105,11 @@
                 font-size: 2rem;
             }
 
-            .countdown-section {
-                padding: 15px;
+            .countdown-card {
+                width: 100%;
             }
 
-            .memory-gallery img {
-                max-width: 90%;
-            }
-
-            .surprise-button {
+            .audio-button {
                 padding: 10px 20px;
                 font-size: 0.9rem;
             }
@@ -131,77 +121,80 @@
         <h1>For My Love, Janet ❤️</h1>
         <p>"My dear Janet, you’ve filled my life with so much joy and love. Every moment with you feels like a dream come true. Thank you for being my strength, my peace, and my happiness. I can’t wait to spend forever with you."</p>
 
-        <!-- Memory Gallery -->
-        <div class="memory-gallery">
+        <!-- Countdown Section -->
+        <div class="countdown-container">
+            <div class="countdown-card">
+                <div class="countdown-title">Your Birthday 🎂</div>
+                <div class="countdown-timer" id="birthdayCountdown"></div>
+            </div>
+            <div class="countdown-card">
+                <div class="countdown-title">Our Engagement 💍</div>
+                <div class="countdown-timer" id="engagementCountdown"></div>
+            </div>
+            <div class="countdown-card">
+                <div class="countdown-title">Our Wedding 💒</div>
+                <div class="countdown-timer" id="weddingCountdown"></div>
+            </div>
+        </div>
+
+        <!-- Image Gallery -->
+        <div class="image-gallery">
             <img src="couple.JPG" alt="Memory 1">
             <img src="love.jpg" alt="Memory 2">
             <img src="romantic.JPG" alt="Memory 3">
         </div>
 
-        <!-- Countdown Sections -->
-        <div class="countdown-section">
-            <div class="countdown-title">Countdown to Our Big Day</div>
-            <div class="countdown" id="marriage-countdown">Loading...</div>
+        <!-- Audio Section -->
+        <div class="audio-container">
+            <button class="audio-button" id="audioControl" onclick="toggleAudio()">Play Music 🎵</button>
         </div>
-
-        <div class="countdown-section">
-            <div class="countdown-title">Countdown to Janet's Birthday</div>
-            <div class="countdown" id="birthday-countdown">Loading...</div>
-        </div>
-
-        <div class="countdown-section">
-            <div class="countdown-title">Countdown to Our Engagement</div>
-            <div class="countdown" id="engagement-countdown">Loading...</div>
-        </div>
-
-        <!-- Surprise Button -->
-        <button class="surprise-button" onclick="toggleSurprise()">Click for a Surprise</button>
-        <p id="surprise-message">🎉 Surprise! You’re the love of my life, Janet! I’m counting down the moments until our forever begins. 💖</p>
     </div>
 
     <footer>
         Made with ❤️ by Agastin for Janet. You are my forever! 💞
     </footer>
 
+    <!-- Audio Element -->
+    <audio id="backgroundAudio" loop>
+        <source src="your-audio-file.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
-        // Countdown Timer
-        function startCountdown() {
-            const marriageDate = new Date('2025-05-28T00:00:00');
-            const birthdayDate = new Date('2025-01-30T00:00:00');
-            const engagementDate = new Date('2025-02-26T00:00:00');
+        const birthdayDate = new Date('2025-01-30T00:00:00');
+        const engagementDate = new Date('2025-02-26T00:00:00');
+        const weddingDate = new Date('2025-05-28T00:00:00');
 
-            const updateCountdown = (date, elementId) => {
-                const now = new Date();
-                const timeLeft = date - now;
+        function updateCountdown(id, eventDate) {
+            const now = new Date();
+            const diff = eventDate - now;
 
-                if (timeLeft <= 0) {
-                    document.getElementById(elementId).innerHTML = "🎉 Happening Today!";
-                    return;
-                }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-                document.getElementById(elementId).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            };
-
-            setInterval(() => {
-                updateCountdown(marriageDate, 'marriage-countdown');
-                updateCountdown(birthdayDate, 'birthday-countdown');
-                updateCountdown(engagementDate, 'engagement-countdown');
-            }, 1000);
+            document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
 
-        // Toggle Surprise Message
-        function toggleSurprise() {
-            const surpriseMessage = document.getElementById('surprise-message');
-            surpriseMessage.style.display = surpriseMessage.style.display === 'block' ? 'none' : 'block';
-        }
+        setInterval(() => {
+            updateCountdown('birthdayCountdown', birthdayDate);
+            updateCountdown('engagementCountdown', engagementDate);
+            updateCountdown('weddingCountdown', weddingDate);
+        }, 1000);
 
-        // Start Countdown on Load
-        window.onload = startCountdown;
+        const audio = document.getElementById('backgroundAudio');
+        const audioControl = document.getElementById('audioControl');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                audioControl.innerHTML = "Pause Music ⏸️";
+            } else {
+                audio.pause();
+                audioControl.innerHTML = "Play Music 🎵";
+            }
+        }
     </script>
 </body>
 </html>
