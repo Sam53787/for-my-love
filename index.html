@@ -321,95 +321,79 @@
                     <img src="image4.jpg" alt="Image 4" onclick="toggleMessage(this)">
                     <div class="message">Message for Image 4</div>
                 </div>
-                <div class="image-container">
-                    <img src="image5.jpg" alt="Image 5" onclick="toggleMessage(this)">
-                    <div class="message">Message for Image 5</div>
-                </div>
-                <div class="image-container">
-                    <img src="image6.jpg" alt="Image 6" onclick="toggleMessage(this)">
-                    <div class="message">Message for Image 6</div>
-                </div>
-                <div class="image-container">
-                    <img src="image7.jpg" alt="Image 7" onclick="toggleMessage(this)">
-                    <div class="message">Message for Image 7</div>
-                </div>
-                <div class="image-container">
-                    <img src="image8.jpg" alt="Image 8" onclick="toggleMessage(this)">
-                    <div class="message">Message for Image 8</div>
-                </div>
-                <div class="image-container">
-                    <img src="image9.jpg" alt="Image 9" onclick="toggleMessage(this)">
-                    <div class="message">Message for Image 9</div>
-                </div>
-                <div class="image-container">
-                    <img src="image10.jpg" alt="Image 10" onclick="toggleMessage(this)">
-                    <div class="message">Message for Image 10</div>
-                </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Made with love for Janet 💖</p>
+        </footer>
     </div>
 
-    <footer>
-        Made with ❤️ by Agastin for Janet. You are my forever! 💞
-    </footer>
-
-    <audio id="backgroundAudio" loop>
-        <source src="romantic-music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
     <script>
-        const birthdayDate = new Date('2025-01-30T00:00:00');
-        const engagementDate = new Date('2025-02-26T00:00:00');
-        const weddingDate = new Date('2025-05-28T00:00:00');
+        // Countdown Timer Functionality
+        const birthdayDate = new Date('2025-01-30T00:00:00').getTime();
+        const engagementDate = new Date('2025-02-26T00:00:00').getTime();
+        const weddingDate = new Date('2025-05-28T00:00:00').getTime();
 
-        function updateCountdown(id, eventDate) {
-            const now = new Date();
-            const diff = eventDate - now;
+        function updateCountdown(id, targetDate) {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        }
 
-        function toggleAudio() {
-            const audio = document.getElementById('backgroundAudio');
-            const button = document.getElementById('audioControl');
-            if (audio.paused) {
-                audio.play();
-                button.innerHTML = 'Pause Music 🎶';
-            } else {
-                audio.pause();
-                button.innerHTML = 'Play Music 🎵';
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById(id).innerHTML = "The time has come!";
             }
         }
 
-        function toggleMessage(imageElement) {
-            const message = imageElement.nextElementSibling;
-            message.style.display = message.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function showPackage() {
-            document.getElementById('package').style.display = 'block';
-            document.querySelector('.tabs button').style.display = 'none';
-            document.getElementById('logoutButton').style.display = 'inline-block';
-        }
-
-        function logout() {
-            document.getElementById('package').style.display = 'none';
-            document.querySelector('.tabs button').style.display = 'inline-block';
-            document.getElementById('logoutButton').style.display = 'none';
-        }
-
-        // Update countdowns every second
-        setInterval(() => {
+        let countdownInterval = setInterval(() => {
             updateCountdown('birthdayCountdown', birthdayDate);
             updateCountdown('engagementCountdown', engagementDate);
             updateCountdown('weddingCountdown', weddingDate);
         }, 1000);
+
+        // Toggle Audio Control
+        let audioPlaying = false;
+        function toggleAudio() {
+            const audioControl = document.getElementById("audioControl");
+            if (audioPlaying) {
+                audioControl.innerText = "Play Music 🎵";
+                audioPlaying = false;
+            } else {
+                audioControl.innerText = "Pause Music 🎶";
+                audioPlaying = true;
+            }
+        }
+
+        // Package 2.0 Tab with Password Protection
+        function showPackage() {
+            const password = prompt("Enter the password:");
+            if (password === "Janet2025") {
+                document.getElementById("package").style.display = "block";
+                document.getElementById("logoutButton").style.display = "block";
+            } else {
+                alert("Incorrect password! Please try again.");
+            }
+        }
+
+        // Logout function
+        function logout() {
+            document.getElementById("package").style.display = "none";
+            document.getElementById("logoutButton").style.display = "none";
+        }
+
+        // Toggle Messages for Images in Package
+        function toggleMessage(imageElement) {
+            const message = imageElement.nextElementSibling;
+            message.style.display = message.style.display === 'block' ? 'none' : 'block';
+        }
     </script>
 </body>
 </html>
