@@ -21,6 +21,11 @@
             margin-bottom: 20px;
         }
 
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
         .tabs {
             margin-bottom: 20px;
         }
@@ -167,44 +172,6 @@
                 font-size: 0.9rem;
             }
         }
-
-        /* Package Gallery Styles */
-        .package-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px auto;
-        }
-
-        .package-item {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            border-radius: 10px;
-            border: 2px solid #ff69b4;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            background: url('placeholder.jpg') center/cover;
-        }
-
-        .message {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            color: #ff69b4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 10px;
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -270,6 +237,41 @@
             She lights my life, my heart, my place.<br>
             Waiting for the day, when two become one,<br>
             Our beautiful journey, just begun.</p>
+
+            <p><strong>(Verse 2)</strong><br>
+            She walks with kindness, a healer's touch,<br>
+            Every word a melody, meaning so much.<br>
+            In her love, there's peace, in her dreams, there’s flight,<br>
+            A speech pathologist spreading hope and light.</p>
+
+            <p><strong>(Pre-Chorus)</strong><br>
+            With every smile, she paints the sky,<br>
+            A future bright with you and I.</p>
+
+            <p><strong>(Chorus)</strong><br>
+            She’s my gym queen, strong and free,<br>
+            With anime worlds that set her spirit free.<br>
+            A daddy's girl with her heart so true,<br>
+            Granny’s blessing shining in all she’ll do.<br>
+            Cute and pretty, modern grace,<br>
+            She lights my life, my heart, my place.<br>
+            Waiting for the day, when two become one,<br>
+            Our beautiful journey, just begun.</p>
+
+            <p><strong>(Bridge)</strong><br>
+            Every step we’ll take hand in hand,<br>
+            Through love’s uncharted, wondrous land.<br>
+            Together we’ll laugh, together we’ll cry,<br>
+            A lifetime of moments under endless skies.</p>
+            <p><strong>(Final Chorus)</strong><br>
+            She’s my gym queen, strong and free,<br>
+            With anime worlds that set her spirit free.<br>
+            A daddy's girl with her heart so true,<br>
+            Granny’s blessing shining in all she’ll do.<br>
+            Cute and pretty, modern grace,<br>
+            She lights my life, my heart, my place.<br>
+            Now the wait is over, forever we’ll run,<br>
+            Our beautiful journey has just begun.</p>
         </div>
 
         <!-- Package Section -->
@@ -280,38 +282,6 @@
         <div id="package" class="section" style="display:none;">
             <h2>Package Details</h2>
             <p>Here are the details of the package...</p>
-            <div class="package-gallery">
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">You are my sunshine ☀️</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">I cherish every moment with you ❤️</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">Forever and always 💕</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">You make my world brighter 🌎✨</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">Every day with you is a blessing 🙏</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">I love you endlessly 😘</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">You are my greatest adventure 🌍</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">My heart beats for you 💖</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">We are meant to be 💑</div>
-                </div>
-                <div class="package-item" onclick="revealMessage(this)">
-                    <div class="message">Together forever, my love 💞</div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -319,57 +289,60 @@
         Made with ❤️ by Agastin for Janet. You are my forever! 💞
     </footer>
 
+    <audio id="backgroundAudio" loop>
+        <source src="romantic-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
-        // Countdown Functionality
-        function startCountdown(targetDate, elementId) {
-            const target = new Date(targetDate).getTime();
-            const interval = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = target - now;
+        const birthdayDate = new Date('2025-01-30T00:00:00');
+        const engagementDate = new Date('2025-02-26T00:00:00');
+        const weddingDate = new Date('2025-05-28T00:00:00');
 
-                if (distance < 0) {
-                    clearInterval(interval);
-                    document.getElementById(elementId).innerHTML = "Event Passed!";
-                } else {
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    document.getElementById(elementId).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
-                }
-            }, 1000);
+        function updateCountdown(id, eventDate) {
+            const now = new Date();
+            const diff = eventDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
 
-        // Initialize countdowns
-        startCountdown('2025-01-30', 'birthdayCountdown'); // Replace with actual date
-        startCountdown('2025-02-26', 'engagementCountdown'); // Replace with actual date
-        startCountdown('2025-05-28', 'weddingCountdown'); // Replace with actual date
+        setInterval(() => {
+            updateCountdown('birthdayCountdown', birthdayDate);
+            updateCountdown('engagementCountdown', engagementDate);
+            updateCountdown('weddingCountdown', weddingDate);
+        }, 1000);
 
-        function revealMessage(element) {
-            const message = element.querySelector('.message');
-            message.style.display = 'flex';
-        }
+        const audio = document.getElementById('backgroundAudio');
+        const audioControl = document.getElementById('audioControl');
 
         function toggleAudio() {
-            const audioButton = document.getElementById('audioControl');
-            const audio = new Audio('your-music-file.mp3');
             if (audio.paused) {
                 audio.play();
-                audioButton.innerText = 'Pause Music 🎵';
+                audioControl.innerHTML = "Pause Music ⏸️";
             } else {
                 audio.pause();
-                audioButton.innerText = 'Play Music 🎵';
+                audioControl.innerHTML = "Play Music 🎵";
             }
         }
 
         function showPackage() {
-            const packageSection = document.getElementById('package');
-            packageSection.style.display = packageSection.style.display === 'none' ? 'block' : 'none';
+            const password = prompt("Please enter the password to view the package details:");
+            if (password === "yourPassword") {
+                document.getElementById('package').style.display = 'block';
+                document.getElementById('logoutButton').style.display = 'inline-block';
+            } else {
+                alert("Incorrect password. Access denied.");
+            }
         }
 
         function logout() {
-            // Add your logout functionality here
-            alert("You have logged out.");
+            document.getElementById('package').style.display = 'none';
+            document.getElementById('logoutButton').style.display = 'none';
         }
     </script>
 </body>
